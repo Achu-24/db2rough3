@@ -5,6 +5,7 @@ const port=5000;
 require("dotenv").config();
 app.use(express.json())
 
+
 mongoose
 .connect(process.env.mongo_uri)
 .then(()=>console.log("mongodb connected"))
@@ -16,6 +17,7 @@ const book=mongoose.model(
         title:String,
         author:String,
         year:Number,
+        
     })
 )
 
@@ -33,13 +35,13 @@ app.get("/",(req,res)=>{
 })
         
 app.get("/books",async(req,res)=>{
-    const book=awaitbook.find()
+    const book=await Book.find()
     res.json(book)
 })
 
 app.post("/books",async(req,res)=>{
     const book=new book(req.body)
-    awaitbook.save();
+    await Book.save();
     res.json(book)
 })
 
